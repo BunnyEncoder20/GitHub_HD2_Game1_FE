@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&display=swap');
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Oxanium", sans-serif;
+  margin: 0;
+  font-size: 1.5em;
+  text-align: center;
+  background-image: url('./assets/helldivers-hero.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #FFE802;
+}
