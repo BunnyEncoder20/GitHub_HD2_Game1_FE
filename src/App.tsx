@@ -1,16 +1,17 @@
 import './App.css';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { GameMatrix } from './Components/GameMatrix.tsx';
 
 const cardImages = [
-  { "src" : "./assets/Eagles/Eagle 110MM Rocket Pods.png"},
-  { "src" : "./assets/Eagles/Eagle 500KG Bomb.png"},
-  { "src" : "./assets/Eagles/Eagle Airstrike.png"},
-  { "src" : "./assets/Eagles/Eagle Cluster Bomb.png"},
-  { "src" : "./assets/Eagles/Eagle Napalm Airstrike.png"},
-  { "src" : "./assets/Eagles/Eagle Rearm.png"},
-  { "src" : "./assets/Eagles/Eagle Smoke Strike.png"},
-  { "src" : "./assets/Eagles/Eagle Strafing Run.png"},
+  { "src" : "../assets/Eagles/Eagle 110MM Rocket Pods.png"},
+  { "src" : "../assets/Eagles/Eagle 500KG Bomb.png"},
+  { "src" : "../assets/Eagles/Eagle Airstrike.png"},
+  { "src" : "../assets/Eagles/Eagle Cluster Bomb.png"},
+  { "src" : "../assets/Eagles/Eagle Napalm Airstrike.png"},
+  { "src" : "../assets/Eagles/Eagle Rearm.png"},
+  { "src" : "../assets/Eagles/Eagle Smoke Strike.png"},
+  { "src" : "../assets/Eagles/Eagle Strafing Run.png"},
 ]
 
 function App() {
@@ -49,6 +50,8 @@ function App() {
     <>
       <h1>HellDivers Card Memory Game</h1>
       <button onClick = {start_game}> Play </button>
+
+      <GameMatrix cards={cards} turns={turns}/>
     </>
   )
 }
