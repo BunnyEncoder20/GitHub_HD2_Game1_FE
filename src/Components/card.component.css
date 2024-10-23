@@ -7,14 +7,15 @@
     display: block;
     border: 2px solid #FFE802;
     border-radius: 6px;
+    background-color: #262626;
 }
 
-/* Front of the card */
+/* back of the card showing */
 .card .frontside {
     transform: rotateY(90deg);
     position: absolute;
 }
-/* front flipped */
+/* card flipped */
 .flipped .frontside {
     transform: rotateY(0deg);
 }
