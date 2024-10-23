@@ -6,7 +6,7 @@ import { CardType } from '../Types/types.ts';
 
 interface SingleCardProps {
     card : CardType;
-    handleChoice : (card : CardType) => void
+    handleChoice(card : CardType) : void
 }
 
 const SingleCard: React.FC<SingleCardProps> = ({card, handleChoice}) => {

@@ -1,6 +1,6 @@
 import './App.css';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SingleCard } from './Components/card.component.tsx';
 import  { CardType } from './Types/types.ts';
 
@@ -49,7 +49,37 @@ function App() {
 
   // Function to handle tile picking
   const handleChoice = (card : CardType ) => {
-    console.log(card)
+    choice1 ? setChoice2(card) : setChoice1(card)
+
+    // We cannot compare the cards here cause the states might not be updated yet
+    // States updates are scheduled and hence we will use hook : useEffect
+  }
+
+  useEffect(() => {
+    if (choice1 && choice2) {
+
+      if (choice1.src === choice2.src) {
+        console.log("Those Cards Match ☑️")
+      }
+      else {
+        console.log("Those cards do not match ☒️")
+      }
+      resetChoices()
+    }
+    else{
+      // if(!choice1){
+      //   console.log("choice1 not selected ☒️")
+      // }
+      // if(!choice2){
+      //   console.log("choice2 not selected ☒️")
+      // }
+    }
+  },[choice1, choice2])
+
+  const resetChoices = () => {
+    setChoice1(null);
+    setChoice2(null);
+    setTurns(prevTurns => prevTurns + 1);
   }
 
 
@@ -68,6 +98,10 @@ function App() {
             />
           ))
         }
+      </div>
+
+      <div className="turnsDisplay">
+        <h1>Turns: {turns}</h1>
       </div>
     </>
   )
