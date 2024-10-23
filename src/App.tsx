@@ -1,7 +1,8 @@
 import './App.css';
 
 import React, { useState } from 'react';
-import { GameMatrix } from './Components/gameMatrix.component.tsx';
+import { SingleCard } from './Components/card.component.tsx';
+import  { CardType } from './Types/types.ts';
 
 const cardImages = [
   { "src" : "./assets/Eagles/Eagle 110MM Rocket Pods.png"},
@@ -17,11 +18,14 @@ const cardImages = [
 function App() {
 
   // State to keep track of our cards
-  const [cards, setCards] = useState<{ id: number; src: string; }[]>([]); 
+  const [cards, setCards] = useState<CardType[]>([]); 
 
   // State for keeping track of turns 
-  const [turns, setTurns] = useState(0);
+  const [turns, setTurns] = useState<number>(0);
 
+  // State for keeping track of user selected cards
+  const [choice1, setChoice1] = useState< CardType | null>(null);
+  const [choice2, setChoice2] = useState< CardType | null>(null);
 
   // Function to start / restart the game
   const start_game = () => {
@@ -43,15 +47,28 @@ function App() {
     setTurns(0)
   }
 
-  console.log(cards)
-  console.log(turns)
+  // Function to handle tile picking
+  const handleChoice = (card : CardType ) => {
+    console.log(card)
+  }
+
 
   return (
     <>
       <h1>HellDivers Card Memory Game</h1>
       <button onClick = {start_game}> Play </button>
 
-      <GameMatrix cards={cards} turns={turns}/>
+      <div className="card-grid">
+        {
+          cards.map(card => (
+            <SingleCard 
+              key={card.id} 
+              card={card}
+              handleChoice={handleChoice}
+            />
+          ))
+        }
+      </div>
     </>
   )
 }
