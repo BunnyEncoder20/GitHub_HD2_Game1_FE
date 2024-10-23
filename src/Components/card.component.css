@@ -9,13 +9,53 @@
     border-radius: 6px;
     background-color: #262626;
 }
-
-/* back of the card showing */
+/* Image of the card showing - frontside */
+/* 
 .card .frontside {
     transform: rotateY(90deg);
+    transition: all ease-ing 0.2s;
     position: absolute;
 }
-/* card flipped */
-.flipped .frontside {
+*/
+/* front card flipped */
+/* .flipped .frontside {
     transform: rotateY(0deg);
+    transition-delay: 0.2s;
+} */
+
+/* Backside of the card */
+/* .card .backside {
+    transition: all ease-in 0.2s;
+    transition-delay: 0.2s;
+} */
+
+/* .flipped .backside {
+    transform: rotateY(90deg);
+    transition-delay: 0s;
+} */
+
+
+/* Image of the card showing - frontside */
+.card .frontside {
+    transform: rotateY(90deg); /* Start with the front rotated */
+    transition: transform 0.2s ease-in-out; /* Transition for flipping */
+    position: absolute;
+    backface-visibility: hidden; /* Hide the backside during flip */
+}
+
+/* front card flipped */
+.flipped .frontside {
+    transform: rotateY(0deg); /* Reset rotation for front */
+}
+
+/* Backside of the card */
+.card .backside {
+    transform: rotateY(0deg); /* Start with the backside hidden */
+    transition: transform 0.2s ease-in-out; /* Smooth flip for the back */
+    backface-visibility: hidden; /* Hide the frontside during flip */
+}
+
+/* When flipped, the backside rotates */
+.flipped .backside {
+    transform: rotateY(90deg); /* Rotate the back */
 }
