@@ -7,9 +7,10 @@ import { CardType } from '../Types/types.ts';
 interface SingleCardProps {
     card : CardType;
     handleChoice(card : CardType) : void
+    flipped: boolean
 }
 
-const SingleCard: React.FC<SingleCardProps> = ({card, handleChoice}) => {
+const SingleCard: React.FC<SingleCardProps> = ({card, handleChoice, flipped}) => {
 
     const handleClick = () => {
         handleChoice(card)
@@ -17,9 +18,9 @@ const SingleCard: React.FC<SingleCardProps> = ({card, handleChoice}) => {
 
     return (
         <div className="card" key={card.id}>
-            <div>
-                <img src={card.src} className="card-front" alt="card frontside" />
-                <img src={card_bg_path} className="card-back" alt="card backside" onClick = {handleClick}/>
+            <div className={flipped ? "flipped" : ""}>
+                <img src={card.src} className="frontside" alt="card frontside" />
+                <img src={card_bg_path} className="backside" alt="card backside" onClick = {handleClick}/>
             </div>
         </div>
     )

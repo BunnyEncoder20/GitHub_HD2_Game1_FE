@@ -5,14 +5,14 @@ import { SingleCard } from "./Components/card.component.tsx";
 import { CardType } from "./Types/types.ts";
 
 const cardImages = [
-  { "src": "./assets/Eagles/Eagle 110MM Rocket Pods.png", "mateched": false },
-  { "src": "./assets/Eagles/Eagle 500KG Bomb.png", "mateched": false },
-  { "src": "./assets/Eagles/Eagle Airstrike.png", "mateched": false },
-  { "src": "./assets/Eagles/Eagle Cluster Bomb.png", "mateched": false },
-  { "src": "./assets/Eagles/Eagle Napalm Airstrike.png", "mateched": false },
-  { "src": "./assets/Eagles/Eagle Rearm.png", "mateched": false },
-  { "src": "./assets/Eagles/Eagle Smoke Strike.png", "mateched": false },
-  { "src": "./assets/Eagles/Eagle Strafing Run.png", "mateched": false },
+  { "src": "./assets/Eagles/Eagle 110MM Rocket Pods.png", "matched": false },
+  { "src": "./assets/Eagles/Eagle 500KG Bomb.png", "matched": false },
+  { "src": "./assets/Eagles/Eagle Airstrike.png", "matched": false },
+  { "src": "./assets/Eagles/Eagle Cluster Bomb.png", "matched": false },
+  { "src": "./assets/Eagles/Eagle Napalm Airstrike.png", "matched": false },
+  { "src": "./assets/Eagles/Eagle Rearm.png", "matched": false },
+  { "src": "./assets/Eagles/Eagle Smoke Strike.png", "matched": false },
+  { "src": "./assets/Eagles/Eagle Strafing Run.png", "matched": false },
 ];
 
 function App() {
@@ -74,10 +74,12 @@ function App() {
 
           });
         });
+		
+		resetChoices();
       } else {
         console.log("Those cards do not match ☒️");
+		setTimeout(() => resetChoices(), 1000);
       }
-      resetChoices();
 
     } else {
       // if(!choice1){
@@ -107,6 +109,7 @@ function App() {
             key={card.id}
             card={card}
             handleChoice={handleChoice}
+			flipped = {card.matched || card === choice1 || card === choice2}
           />
         ))}
       </div>
