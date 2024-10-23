@@ -1,7 +1,7 @@
 import './App.css';
 
 import React, { useState } from 'react';
-import { GameMatrix } from './Components/GameMatrix.tsx';
+import { GameMatrix } from './Components/gameMatrix.component.tsx';
 
 const cardImages = [
   { "src" : "./assets/Eagles/Eagle 110MM Rocket Pods.png"},
@@ -21,8 +21,6 @@ function App() {
 
   // State for keeping track of turns 
   const [turns, setTurns] = useState(0);
-
-  // For conditional rendering
 
 
   // Function to start / restart the game
