@@ -1,31 +1,30 @@
-import './App.css';
+import "./App.css";
 
-import React, { useState, useEffect } from 'react';
-import { SingleCard } from './Components/card.component.tsx';
-import  { CardType } from './Types/types.ts';
+import React, { useEffect, useState } from "react";
+import { SingleCard } from "./Components/card.component.tsx";
+import { CardType } from "./Types/types.ts";
 
 const cardImages = [
-  { "src" : "./assets/Eagles/Eagle 110MM Rocket Pods.png"},
-  { "src" : "./assets/Eagles/Eagle 500KG Bomb.png"},
-  { "src" : "./assets/Eagles/Eagle Airstrike.png"},
-  { "src" : "./assets/Eagles/Eagle Cluster Bomb.png"},
-  { "src" : "./assets/Eagles/Eagle Napalm Airstrike.png"},
-  { "src" : "./assets/Eagles/Eagle Rearm.png"},
-  { "src" : "./assets/Eagles/Eagle Smoke Strike.png"},
-  { "src" : "./assets/Eagles/Eagle Strafing Run.png"},
-]
+  { "src": "./assets/Eagles/Eagle 110MM Rocket Pods.png", "mateched": false },
+  { "src": "./assets/Eagles/Eagle 500KG Bomb.png", "mateched": false },
+  { "src": "./assets/Eagles/Eagle Airstrike.png", "mateched": false },
+  { "src": "./assets/Eagles/Eagle Cluster Bomb.png", "mateched": false },
+  { "src": "./assets/Eagles/Eagle Napalm Airstrike.png", "mateched": false },
+  { "src": "./assets/Eagles/Eagle Rearm.png", "mateched": false },
+  { "src": "./assets/Eagles/Eagle Smoke Strike.png", "mateched": false },
+  { "src": "./assets/Eagles/Eagle Strafing Run.png", "mateched": false },
+];
 
 function App() {
-
   // State to keep track of our cards
-  const [cards, setCards] = useState<CardType[]>([]); 
+  const [cards, setCards] = useState<CardType[]>([]);
 
-  // State for keeping track of turns 
+  // State for keeping track of turns
   const [turns, setTurns] = useState<number>(0);
 
   // State for keeping track of user selected cards
-  const [choice1, setChoice1] = useState< CardType | null>(null);
-  const [choice2, setChoice2] = useState< CardType | null>(null);
+  const [choice1, setChoice1] = useState<CardType | null>(null);
+  const [choice2, setChoice2] = useState<CardType | null>(null);
 
   // Function to start / restart the game
   const start_game = () => {
@@ -34,39 +33,53 @@ function App() {
     // This is done by swapping  the cards when the random number is < 0
     // Next we attach an random (6 digit positive number) id onto each of the cards using map
     const shuffledDeck = [
-      ...cardImages, 
-      ...cardImages
+      ...cardImages,
+      ...cardImages,
     ]
-    .sort(() => Math.random() - 0.5)
-    .map((card) => ({ ...card, id: Math.floor(100000 + Math.random()*900000) }) )
+      .sort(() => Math.random() - 0.5)
+      .map((card) => ({
+        ...card,
+        id: Math.floor(100000 + Math.random() * 900000),
+      }));
 
-    // Make a new random cards list 
-    setCards(shuffledDeck)
+    // Make a new random cards list
+    setCards(shuffledDeck);
 
-    // Reset the turns 
-    setTurns(0)
-  }
+    // Reset the turns
+    setTurns(0);
+  };
 
   // Function to handle tile picking
-  const handleChoice = (card : CardType ) => {
-    choice1 ? setChoice2(card) : setChoice1(card)
+  const handleChoice = (card: CardType) => {
+    choice1 ? setChoice2(card) : setChoice1(card);
 
     // We cannot compare the cards here cause the states might not be updated yet
     // States updates are scheduled and hence we will use hook : useEffect
-  }
+  };
 
   useEffect(() => {
     if (choice1 && choice2) {
-
       if (choice1.src === choice2.src) {
-        console.log("Those Cards Match ☑️")
+    	console.log("Those Cards Match ☑️");
+
+        setCards((prevCards) => {
+          return prevCards.map((card) => {
+
+            if (card.src === choice1.src) {
+              return { ...card, matched: true };
+            } 
+			else {
+              return card;
+            }
+
+          });
+        });
+      } else {
+        console.log("Those cards do not match ☒️");
       }
-      else {
-        console.log("Those cards do not match ☒️")
-      }
-      resetChoices()
-    }
-    else{
+      resetChoices();
+
+    } else {
       // if(!choice1){
       //   console.log("choice1 not selected ☒️")
       // }
@@ -74,37 +87,35 @@ function App() {
       //   console.log("choice2 not selected ☒️")
       // }
     }
-  },[choice1, choice2])
+  }, [choice1, choice2]);
 
   const resetChoices = () => {
     setChoice1(null);
     setChoice2(null);
-    setTurns(prevTurns => prevTurns + 1);
-  }
+    setTurns((prevTurns) => prevTurns + 1);
+  };
 
 
   return (
     <>
       <h1>HellDivers Card Memory Game</h1>
-      <button onClick = {start_game}> Play </button>
+      <button onClick={start_game}>Play</button>
 
       <div className="card-grid">
-        {
-          cards.map(card => (
-            <SingleCard 
-              key={card.id} 
-              card={card}
-              handleChoice={handleChoice}
-            />
-          ))
-        }
+        {cards.map((card) => (
+          <SingleCard
+            key={card.id}
+            card={card}
+            handleChoice={handleChoice}
+          />
+        ))}
       </div>
 
       <div className="turnsDisplay">
         <h1>Turns: {turns}</h1>
       </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
