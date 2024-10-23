@@ -22,6 +22,8 @@ function App() {
   // State for keeping track of turns 
   const [turns, setTurns] = useState(0);
 
+  // For conditional rendering
+
 
   // Function to start / restart the game
   const start_game = () => {
