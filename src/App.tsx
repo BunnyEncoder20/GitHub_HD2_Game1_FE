@@ -29,6 +29,11 @@ function App() {
   // State to diable card selection
   const [disabled, setDisabled] = useState<boolean>(false);
 
+  // UseEffect Hook to start game automagically
+  useEffect(() => {
+    start_game();
+  },[])
+
   // Function to start / restart the game
   const start_game = () => {
     // duplicate the cards cause we want there to be 2 cards with the same image
@@ -48,6 +53,10 @@ function App() {
     // Make a new random cards list
     setCards(shuffledDeck);
 
+    // Reset the choices 
+    setChoice1(null);
+    setChoice2(null);
+
     // Reset the turns
     setTurns(0);
   };
@@ -65,7 +74,7 @@ function App() {
     if (choice1 && choice2) {
       // disable the selection of other cards 
       setDisabled(true);
-      
+
       if (choice1.src === choice2.src) {
     	console.log("Those Cards Match ☑️");
 
@@ -111,7 +120,7 @@ function App() {
   return (
     <div className="game-container">
       <h1>HellDivers Card Memory Game</h1>
-      <button onClick={start_game}>Play</button>
+      <button onClick={start_game}>New Game</button>
 
       <div className="card-grid">
         {cards.map((card) => (
