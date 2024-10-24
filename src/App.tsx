@@ -1,6 +1,6 @@
 import "./App.css";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { SingleCard } from "./Components/card.component.tsx";
 import { CardType } from "./Types/types.ts";
 
