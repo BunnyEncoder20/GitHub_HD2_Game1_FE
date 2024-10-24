@@ -6,14 +6,17 @@ import { CardType } from '../Types/types.ts';
 
 interface SingleCardProps {
     card : CardType;
-    handleChoice(card : CardType) : void
-    flipped: boolean
+    handleChoice(card : CardType) : void;
+    flipped: boolean;
+    disabled: boolean;
 }
 
-const SingleCard: React.FC<SingleCardProps> = ({card, handleChoice, flipped}) => {
+const SingleCard: React.FC<SingleCardProps> = ({card, handleChoice, flipped, disabled}) => {
 
     const handleClick = () => {
-        handleChoice(card)
+        if (!disabled){
+            handleChoice(card)
+        }
     }
 
     return (

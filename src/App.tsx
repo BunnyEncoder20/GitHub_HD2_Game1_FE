@@ -26,6 +26,9 @@ function App() {
   const [choice1, setChoice1] = useState<CardType | null>(null);
   const [choice2, setChoice2] = useState<CardType | null>(null);
 
+  // State to diable card selection
+  const [disabled, setDisabled] = useState<boolean>(false);
+
   // Function to start / restart the game
   const start_game = () => {
     // duplicate the cards cause we want there to be 2 cards with the same image
@@ -58,7 +61,11 @@ function App() {
   };
 
   useEffect(() => {
+    
     if (choice1 && choice2) {
+      // disable the selection of other cards 
+      setDisabled(true);
+      
       if (choice1.src === choice2.src) {
     	console.log("Those Cards Match ☑️");
 
@@ -95,11 +102,14 @@ function App() {
     setChoice1(null);
     setChoice2(null);
     setTurns((prevTurns) => prevTurns + 1);
+
+    // enable the selection of other cards
+    setDisabled(false);
   };
 
 
   return (
-    <>
+    <div className="game-container">
       <h1>HellDivers Card Memory Game</h1>
       <button onClick={start_game}>Play</button>
 
@@ -109,7 +119,8 @@ function App() {
             key={card.id}
             card={card}
             handleChoice={handleChoice}
-			flipped = {card.matched || card === choice1 || card === choice2}
+			      flipped = {card.matched || card === choice1 || card === choice2}
+            disabled = {disabled}
           />
         ))}
       </div>
@@ -117,7 +128,7 @@ function App() {
       <div className="turnsDisplay">
         <h1>Turns: {turns}</h1>
       </div>
-    </>
+    </div>
   );
 }
 
