@@ -1,4 +1,4 @@
-import './Card.component.css';
+import './card.component.css';
 
 import React from 'react';
 import { card_bg_path } from '../constants.ts';

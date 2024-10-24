@@ -1,9 +1,7 @@
 .card {
     position: relative;
-    width: calc(20vw - 10px); /* Adjust the size of each card */
-    height: calc(20vw - 10px);
-    background-color: #262626;
-  }
+    /* background-color: #262626; */
+}
 
 .card img {
     width: 100%;
@@ -16,7 +14,7 @@
 /* Image of the card showing - frontside */
 .card .frontside {
     transform: rotateY(90deg);
-    transition: all ease-ing 0.2s;
+    transition: all ease-in 0.2s;
     position: absolute;
 }
 
@@ -28,7 +26,6 @@
 
 /* Backside of the card */
 .card .backside {
-    transform: rotateY(0deg);
     transition: all ease-in 0.2s;
     transition-delay: 0.2s;
 }

@@ -118,7 +118,7 @@ function App() {
 
 
   return (
-    <div className="game-container">
+    <div className="App">
       <h1>HellDivers Card Memory Game</h1>
       <button onClick={start_game}>New Game</button>
 
@@ -135,7 +135,7 @@ function App() {
       </div>
 
       <div className="turnsDisplay">
-        <h1>Turns: {turns}</h1>
+        <h3>Turns: {turns}</h3>
       </div>
     </div>
   );
